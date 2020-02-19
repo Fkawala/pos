@@ -1,0 +1,1 @@
+This add-on turns the POS into a self service weighting station.
