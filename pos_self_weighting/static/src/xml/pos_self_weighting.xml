@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates id="template" xml:space="preserve">
 
-    <t t-name="SelfWeightingScreenWidget">
+    <t t-name="ProductSelfService">
             <div class="product-screen screen">
                 <div class="leftpane">
                     <div class='window'>
@@ -29,9 +29,9 @@
                     <table class="layout-table">
 
                         <tr class="header-row">
-<!--                            <td class="header-cell">-->
+                            <td class="header-cell">
 <!--                                <span class="placeholder-ProductCategoriesWidget" />-->
-<!--                            </td>-->
+                            </td>
                         </tr>
 
                         <tr class="content-row">
@@ -46,5 +46,36 @@
                 </div>
             </div>
         </t>
+
+    <t t-name="SelfWeightingHome">
+        <div class='self-service-screen screen'>
+            <div class='screen-content'>
+                <div class='left-content pc33'>
+                    <div class="centered">
+                        <div class='big-button green tare'>
+                            Tare<br/>a container
+                            <span class='ico foodbox' />
+                         </div>
+                    </div>
+                </div>
+                <div class='left-content middle'>
+                    <div class="centered">
+                        <div class='big-button red weight'>
+                            Weight a filled-up container
+                            <span class='ico foodinbox' />
+                         </div>
+                    </div>
+                </div>
+                <div class='right-content pc33'>
+                    <div class="centered">
+                        <div class='big-button red weight'>
+                            Weight<br/>a product
+                            <span class='ico scale' />
+                         </div>
+                    </div>
+                </div>
+             </div>
+         </div>
+    </t>
 
 </templates>

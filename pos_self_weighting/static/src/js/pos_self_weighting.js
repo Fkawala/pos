@@ -13,80 +13,112 @@ odoo.define('pos_self_weighting.screens', function (require) {
     var QWeb = core.qweb;
 
     // XX
-    var SelfWeightingWidget = screens.ProductScreenWidget.include({
-        template:'SelfWeightingScreenWidget',
+
+//    var ProductSelfService = screens.ProductScreenWidget.extend({
+//        template:'ProductScreenWithoutCategories',
+//        next_screen: 'selfWeighting',
+//        previous_screen: 'selfWeighting',
 //
-//        start: function(){
+//    })
 //
-//            var self = this;
+    var SelfWeightingWidget = screens.ScreenWidget.extend({
+        template:'SelfWeightingHome',
+        next_screen: 'selfWeighting',
+        previous_screen: 'selfWeighting',
+
+          start: function(){
 //
-//            this.actionpad = new ActionpadWidget(this,{});
-//            this.actionpad.replace(this.$('.placeholder-ActionpadWidget'));
+//        var self = this;
 //
-//            this.numpad = new NumpadWidget(this,{});
-//            this.numpad.replace(this.$('.placeholder-NumpadWidget'));
+//        this.actionpad = new screens.ActionpadWidget(this,{});
+//        this.actionpad.replace(this.$('.placeholder-ActionpadWidget'));
 //
-//            this.order_widget = new OrderWidget(this,{
-//                numpad_state: this.numpad.state,
-//            });
-//            this.order_widget.replace(this.$('.placeholder-OrderWidget'));
+//        this.numpad = new screens.NumpadWidget(this,{});
+//        this.numpad.replace(this.$('.placeholder-NumpadWidget'));
 //
-//            this.product_list_widget = new ProductListWidget(this,{
-//                click_product_action: function(product){ self.click_product(product); },
-//                product_list: this.pos.db.get_product_by_category(0)
-//            });
-//            this.product_list_widget.replace(this.$('.placeholder-ProductListWidget'));
+//        this.order_widget = new screens.OrderWidget(this,{
+//            numpad_state: this.numpad.state,
+//        });
+//        this.order_widget.replace(this.$('.placeholder-OrderWidget'));
 //
-//            this.product_categories_widget = new ProductCategoriesWidget(this,{
-//                product_list_widget: this.product_list_widget,
-//            });
-//            this.product_categories_widget.replace(this.$('.placeholder-ProductCategoriesWidget'));
-//
-//            this.action_buttons = {};
-//            var classes = action_button_classes;
-//            for (var i = 0; i < classes.length; i++) {
-//                var classe = classes[i];
-//                if ( !classe.condition || classe.condition.call(this) ) {
-//                    var widget = new classe.widget(this,{});
-//                    widget.appendTo(this.$('.control-buttons'));
-//                    this.action_buttons[classe.name] = widget;
-//                }
+//        this.product_list_widget = new screens.ProductListWidget(this,{
+//            click_product_action: function(product){ self.click_product(product); },
+//            product_list: this.pos.db.get_product_by_category(0)
+//        });
+//        this.product_list_widget.replace(this.$('.placeholder-ProductListWidget'));
+
+//        this.product_categories_widget = new ProductCategoriesWidget(this,{
+//            product_list_widget: this.product_list_widget,
+//        });
+//        this.product_categories_widget.replace(this.$('.placeholder-ProductCategoriesWidget'));
+
+//        this.action_buttons = {};
+//        var classes = screens.action_button_classes;
+//        for (var i = 0; i < classes.length; i++) {
+//            var classe = classes[i];
+//            if ( !classe.condition || classe.condition.call(this) ) {
+//                var widget = new classe.widget(this,{});
+//                widget.appendTo(this.$('.control-buttons'));
+//                this.action_buttons[classe.name] = widget;
 //            }
-//            if (_.size(this.action_buttons)) {
-//                this.$('.control-buttons').removeClass('oe_hidden');
-//            }
-//        },
-//
-//        click_product: function(product) {
-//           if(product.to_weight && this.pos.config.iface_electronic_scale){
-//               this.gui.show_screen('scale',{product: product});
-//           }else{
-//               this.pos.get_order().add_product(product);
-//           }
-//        },
-//
-//        show: function(reset){
-//            this._super();
-//            if (reset) {
-//                this.product_categories_widget.reset_category();
-//                this.numpad.state.reset();
-//            }
-//            if (this.pos.config.iface_vkeyboard && this.chrome.widget.keyboard) {
-//                this.chrome.widget.keyboard.connect($(this.el.querySelector('.searchbox input')));
-//            }
-//        },
-//
-//        close: function(){
-//            this._super();
-//            if(this.pos.config.iface_vkeyboard && this.chrome.widget.keyboard){
-//                this.chrome.widget.keyboard.hide();
-//            }
-//        },
+//        }
+//        if (_.size(this.action_buttons)) {
+//            this.$('.control-buttons').removeClass('oe_hidden');
+//        }
+    },
+
+        renderElement: function() {
+        var self = this;
+        this._super();
+        this.$('.tare').click(function(){
+            self.gui.show_screen('tare');
+        });
+        this.$('.weight').click(function(){
+            self.gui.show_screen('products');
+        });
+    }
     });
 
     gui.define_screen({name:'selfWeighting', widget: SelfWeightingWidget});
 
-//    if(this.pos.config.iface_self_weight) {
-//        gui.set_default_screen('selfWeighting');
-//    }
+//    screens.ProductScreenWidget = screens.ProductScreenWidget.include({
+//        show: function(reset){
+//        this._super();
+////        if (reset) {
+////            this.product_categories_widget.reset_category();
+////            this.numpad.state.reset();
+////        }
+//    },
+
+//    });
+//    var _super_ = chrome.Chrome.prototype;
+    chrome.Chrome = chrome.Chrome.include({
+        build_widgets: function(){
+        if (this.pos.config.iface_self_weight) {
+            this.widgets.shift();
+            this._super();
+            this.gui.set_default_screen('selfWeighting');
+            this.gui.set_startup_screen('selfWeighting');
+
+//            this.$('.pos-rightheader')[0].style.removeProperty("left");
+//            this.$('.pos-rightheader')[0].style.setProperty("right","440px");
+
+        } else {
+            this._super();
+        }
+
+        },
+
+
+
+    });
+
+
+//
+//    var pos_ready_function = chrome.Chrome.pos.ready.done;
+//    chrome.Chrome.pos.ready.done(function(){
+//        pos_ready_function();
+//        chrome.Chrome.gui.set_default_screen('selfWeighting');
+//    });
+
 });
