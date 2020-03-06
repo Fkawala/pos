@@ -1,8 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates id="template" xml:space="preserve">
 
-    <t t-name="ProductSelfService">
-            <div class="product-screen screen">
+    <t t-name="SelfServiceWidgetHome">
+        <div class='self-service-screen screen'>
+            <div class='screen-content'>
+                <div class='left-content pc33'>
+                    <div class="centered">
+                        <div class='big-button green tare'>
+                            Tare<br/>a container
+                            <span class='ico foodbox' />
+                         </div>
+                    </div>
+                </div>
+                <div class='left-content middle'>
+                    <div class="centered">
+                        <div class='big-button red weight'>
+                            Weight a product in a container
+                            <span class='ico foodinbox' />
+                         </div>
+                    </div>
+                </div>
+                <div class='right-content pc33'>
+                    <div class="centered">
+                        <div class='big-button blue weight'>
+                            Weight<br/>a product
+                            <span class='ico scale' />
+                         </div>
+                    </div>
+                </div>
+             </div>
+         </div>
+    </t>
+
+    <t t-name="SelfServiceProduct">
+            <div class="self-product-screen screen">
                 <div class="leftpane">
                     <div class='window'>
                         <div class='subwindow'>
@@ -18,8 +49,7 @@
                                 <div class='subwindow-container-fix pads'>
                                     <div class="control-buttons oe_hidden"></div>
                                     <div class="placeholder-ActionpadWidget"></div>
-                                    <div class="placeholder-NumpadWidget"></div>
-                                </div>
+                                    </div>
                             </div>
                         </div>
 
@@ -30,8 +60,9 @@
 
                         <tr class="header-row">
                             <td class="header-cell">
-<!--                                <span class="placeholder-ProductCategoriesWidget" />-->
-                            </td>
+
+                                    <div class="placeholder-SelfServiceSearchWidget"></div>
+    </td>
                         </tr>
 
                         <tr class="content-row">
@@ -47,35 +78,24 @@
             </div>
         </t>
 
-    <t t-name="SelfWeightingHome">
-        <div class='self-service-screen screen'>
-            <div class='screen-content'>
-                <div class='left-content pc33'>
-                    <div class="centered">
-                        <div class='big-button green tare'>
-                            Tare<br/>a container
-                            <span class='ico foodbox' />
-                         </div>
-                    </div>
+    <t t-name="SelfServiceActionpadWidget">
+        <div class="actionpad">
+            <button class='button back'>
+                <i class='fa fa-angle-double-left'></i>
+                Back
+            </button>
+            <button class='button print'>
+                <div class='print-circle'>
+                    <i class='fa fa-chevron-right' />
                 </div>
-                <div class='left-content middle'>
-                    <div class="centered">
-                        <div class='big-button red weight'>
-                            Weight a filled-up container
-                            <span class='ico foodinbox' />
-                         </div>
-                    </div>
-                </div>
-                <div class='right-content pc33'>
-                    <div class="centered">
-                        <div class='big-button red weight'>
-                            Weight<br/>a product
-                            <span class='ico scale' />
-                         </div>
-                    </div>
-                </div>
-             </div>
-         </div>
+                Validate
+            </button>
+        </div>
     </t>
 
+    <t t-name="SelfServiceSearchWidget">
+        <div class="searchbox">
+        <input type="text" placeholder="&#xF002; Search Products" style="font-family:Arial, FontAwesome"/>
+                            </div>
+    </t>
 </templates>
