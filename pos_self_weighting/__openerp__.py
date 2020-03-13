@@ -11,7 +11,7 @@
     'license': 'AGPL-3',
     'depends': ['point_of_sale'],
     'maintainers': ['fkawala'],
-    'depends': ['pos_barcode_tare', 'base_fontawesome'],
+    'depends': ['pos_barcode_tare', 'pos_price_to_weight'],
     'data': [
         'pos_self_weighting.xml',
         'views/pos_config_view.xml'
